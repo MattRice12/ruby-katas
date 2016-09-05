@@ -25,37 +25,45 @@ WIN = "You WIN!"
 LOSE = "You LOSE!"
 TIE = "Tie Game!"
 
-def shoot
-  arr = ["rock", "paper", "scissors"]
-  comp_play = arr.sample
-  play = response(ASK)
+class RPS
+  attr_accessor :player_wins, :comp_wins, :tie
 
-  puts "\nComputer chose #{comp_play}"
-  puts "You chose #{play}"
-  conditions(comp_play, play)
-end
+  def initialize
+    @player_wins = 0
+    @comp_wins = 0
+    @tie = 0
+  end
 
-def conditions(comp_play, play)
-  case play.downcase
-  when comp_play
-    puts TIE
-  when "rock"
-    win_lose(comp_play, "paper", "scissors")
-  when "paper"
-    win_lose(comp_play, "scissors", "rock")
-  when "scissors"
-    win_lose(comp_play, "rock", "paper")
+  def shoot
+    1000.times do
+      arr = ["rock", "paper", "scissors"]
+      comp_play = arr.sample
+      player = arr.sample
+
+      conditions(comp_play, player)
+    end
+    puts "Player: #{player_wins}"
+    puts "Computer: #{comp_wins}"
+    puts "Ties: #{tie}"
+  end
+
+  def conditions(comp_play, player)
+    case player
+    when comp_play
+      @tie += 1
+    when "rock"
+      win_lose(comp_play, "paper", "scissors")
+    when "paper"
+      win_lose(comp_play, "scissors", "rock")
+    when "scissors"
+      win_lose(comp_play, "rock", "paper")
+    end
+  end
+
+  def win_lose(comp_play, lose, win)
+    @player_wins += 1 if comp_play == lose
+    @comp_wins += 1 if comp_play == win
   end
 end
 
-def win_lose(comp_play, lose, win)
-  puts LOSE if comp_play == lose
-  puts WIN if comp_play == win
-end
-
-def response(question)
-  puts question
-  gets.chomp
-end
-
-shoot
+RPS.new.shoot
