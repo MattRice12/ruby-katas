@@ -25,35 +25,68 @@
 #_________________________________________________________________
 
 
-def check_age
-  arr = []
-  get_response(arr)
-  bounce(arr)
-  ask_to_continue
+class Bouncer
+  def check_age
+    arr = []
+
+
+    print "Are you currently in the US or UK? => "
+    country = gets.chomp
+
+    if country.downcase == "us"
+      get_response_US(arr)
+    elsif country.downcase == "uk"
+      get_response_UK(arr)
+    else
+      puts "I'm sorry, I didn't catch that..."
+      check_age
+    end
+
+    bounce(arr)
+    ask_to_continue
+  end
+
+
+  def get_response_US(arr)
+    print "What is your age? => "
+    age = gets.chomp.to_i
+    arr.push("vote", "smoke") if age >= 18
+    arr.push("drink") if age >= 21
+    arr.push("rent a car") if age >= 25
+  end
+
+  def get_response_UK(arr)
+    print "What is your age? => "
+    age = gets.chomp.to_i
+    arr.push("vote", "smoke", "drink") if age >= 18
+    parents(arr) if age == 16 || age == 17
+    arr.push("rent a car") if age >= 25
+  end
+
+  def parents(arr)
+    print "You're too young to drink without parental supervision. Are your parents here? => "
+    parent_supervision = gets.chomp
+    return arr.push("drink") if parent_supervision.downcase == "y"
+    return if parent_supervision.downcase == "n"
+    print "I'm sorry, I didn't catch that... "
+    parents
+  end
+
+  def bounce(arr)
+    return puts "You can't do anything!" if arr.empty?
+    return puts "You can #{arr.join(" and ")}." if arr.count == 1 || arr.count == 2
+    last = arr.pop
+    puts "You can #{arr.join(", ")}, and #{last}."
+  end
+
+  def ask_to_continue
+    puts "Would you like to continue? [Y/n] => "
+    continue = gets.chomp
+    check_age if continue.downcase == "y" || continue == ""
+    return if continue.downcase == "n"
+    print "I'm sorry, I didn't catch that... "
+    ask_to_continue
+  end
 end
 
-def get_response(arr)
-  print "What is your age? => "
-  age = gets.chomp.to_i
-  arr.push("vote", "smoke") if age >= 18
-  arr.push("drink") if age >= 21
-  arr.push("rent a car") if age >= 25
-end
-
-def bounce(arr)
-  return puts "You can't do anything!" if arr.empty?
-  return puts "You can #{arr.join(" and ")}." if arr.count == 2
-  last = arr.pop
-  puts "You can #{arr.join(", ")}, and #{last}."
-end
-
-def ask_to_continue
-  puts "Would you like to continue? [Y/n] => "
-  continue = gets.chomp
-  check_age if continue.downcase == "y" || continue == ""
-  return if continue.downcase == "n"
-  print "I'm sorry, I didn't catch that... "
-  ask_to_continue
-end
-
-check_age
+Bouncer.new.check_age
