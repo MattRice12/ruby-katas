@@ -39,10 +39,7 @@ class Bouncer
     ask_to_continue
   end
 
-  def response(question)
-    print question
-    gets.chomp
-  end
+  private
 
   def check_country(arr)
     country = response(COUNTRY)
@@ -50,6 +47,26 @@ class Bouncer
     return get_response_UK(arr) if country.downcase == "uk"
     print BAD_INPUT
     check_age
+  end
+
+  def bounce(arr)
+    return puts TOO_YOUNG if arr.empty?
+    return puts "You can #{arr.join(" and ")}." if arr.count == 1 || arr.count == 2
+    last = arr.pop
+    puts "You can #{arr.join(", ")}, and #{last}."
+  end
+
+  def ask_to_continue
+    continue = response(CONTINUE)
+    check_age if continue.downcase == "y" || continue == ""
+    return if continue.downcase == "n"
+    print BAD_INPUT
+    ask_to_continue
+  end
+
+  def response(question)
+    print question
+    gets.chomp
   end
 
   def get_response_US(arr)
@@ -72,21 +89,6 @@ class Bouncer
     return if parent_supervision.downcase == "n"
     print BAD_INPUT
     parents(arr)
-  end
-
-  def bounce(arr)
-    return puts TOO_YOUNG if arr.empty?
-    return puts "You can #{arr.join(" and ")}." if arr.count == 1 || arr.count == 2
-    last = arr.pop
-    puts "You can #{arr.join(", ")}, and #{last}."
-  end
-
-  def ask_to_continue
-    continue = response(CONTINUE)
-    check_age if continue.downcase == "y" || continue == ""
-    return if continue.downcase == "n"
-    print BAD_INPUT
-    ask_to_continue
   end
 end
 
