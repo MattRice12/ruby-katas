@@ -21,6 +21,9 @@
 #_______________________________________________________________________
 
 ASK = "Rock, Paper, or Scissors?"
+WIN = "You WIN!"
+LOSE = "You LOSE!"
+TIE = "Tie Game!"
 
 def shoot
   arr = ["rock", "paper", "scissors"]
@@ -29,20 +32,25 @@ def shoot
 
   puts "\nComputer chose #{comp_play}"
   puts "You chose #{play}"
+  conditions(comp_play, play)
+end
 
+def conditions(comp_play, play)
   case play.downcase
   when comp_play
-    puts "Tie Game!"
+    puts TIE
   when "rock"
-    puts "You lose!" if comp_play == "paper"
-    puts "You win!" if comp_play == "scissors"
+    win_lose(comp_play, "paper", "scissors")
   when "paper"
-    puts "You lose!" if comp_play == "scissors"
-    puts "You win!" if comp_play == "rock"
+    win_lose(comp_play, "scissors", "rock")
   when "scissors"
-    puts "You lose!" if comp_play == "rock"
-    puts "You win!" if comp_play == "paper"
+    win_lose(comp_play, "rock", "paper")
   end
+end
+
+def win_lose(comp_play, lose, win)
+  puts LOSE if comp_play == lose
+  puts WIN if comp_play == win
 end
 
 def response(question)
