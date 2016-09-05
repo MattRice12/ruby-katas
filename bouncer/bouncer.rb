@@ -24,6 +24,12 @@
 
 #_________________________________________________________________
 
+COUNTRY = "\nAre you currently in the US or UK? => "
+AGE = "\nWhat is your age? => "
+PARENTS = "\nYou're too young to drink without parental supervision. Are your parents here? => "
+CONTINUE = "\nWould you like to continue? [Y/n] => "
+BAD_INPUT = "\nI'm sorry, I didn't catch that... "
+TOO_YOUNG = "You're too young to do anything!"
 
 class Bouncer
   def check_age
@@ -33,58 +39,53 @@ class Bouncer
     ask_to_continue
   end
 
-  def check_country(arr)
-    print "\nAre you currently in the US or UK? => "
-    country = gets.chomp
+  def response(question)
+    print question
+    gets.chomp
+  end
 
-    if country.downcase == "us"
-      get_response_US(arr)
-    elsif country.downcase == "uk"
-      get_response_UK(arr)
-    else
-      puts "I'm sorry, I didn't catch that..."
-      check_age
-    end
+  def check_country(arr)
+    country = response(COUNTRY)
+    return get_response_US(arr) if country.downcase == "us"
+    return get_response_UK(arr) if country.downcase == "uk"
+    print BAD_INPUT
+    check_age
   end
 
   def get_response_US(arr)
-    print "\nWhat is your age? => "
-    age = gets.chomp.to_i
+    age = response(AGE).to_i
     arr.push("vote", "smoke") if age >= 18
     arr.push("drink") if age >= 21
     arr.push("rent a car") if age >= 25
   end
 
   def get_response_UK(arr)
-    print "\nWhat is your age? => "
-    age = gets.chomp.to_i
+    age = response(AGE).to_i
     arr.push("vote", "smoke", "drink") if age >= 18
     parents(arr) if age == 16 || age == 17
     arr.push("rent a car") if age >= 25
   end
 
   def parents(arr)
-    print "\nYou're too young to drink without parental supervision. Are your parents here? => "
-    parent_supervision = gets.chomp
+    parent_supervision = response(PARENTS)
     return arr.push("drink") if parent_supervision.downcase == "y"
     return if parent_supervision.downcase == "n"
-    print "I'm sorry, I didn't catch that... "
+    print BAD_INPUT
     parents(arr)
   end
 
   def bounce(arr)
-    return puts "You're too young to do anything!" if arr.empty?
+    return puts TOO_YOUNG if arr.empty?
     return puts "You can #{arr.join(" and ")}." if arr.count == 1 || arr.count == 2
     last = arr.pop
     puts "You can #{arr.join(", ")}, and #{last}."
   end
 
   def ask_to_continue
-    print "\nWould you like to continue? [Y/n] => "
-    continue = gets.chomp
+    continue = response(CONTINUE)
     check_age if continue.downcase == "y" || continue == ""
     return if continue.downcase == "n"
-    print "\nI'm sorry, I didn't catch that... "
+    print BAD_INPUT
     ask_to_continue
   end
 end
