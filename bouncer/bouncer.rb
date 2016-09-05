@@ -27,11 +27,20 @@
 
 def check_age
   arr = []
+  get_response(arr)
+  bounce(arr)
+  ask_to_continue
+end
+
+def get_response(arr)
   print "What is your age? => "
   age = gets.chomp.to_i
   arr.push("vote", "smoke") if age >= 18
   arr.push("drink") if age >= 21
   arr.push("rent a car") if age >= 25
+end
+
+def bounce(arr)
   if arr.empty?
     puts "You can't do anything!"
   elsif arr.count > 2
@@ -39,6 +48,18 @@ def check_age
     puts "You can #{arr.join(", ")}, and #{last}."
   else
     puts "You can #{arr.join(" and ")}."
+  end
+end
+
+def ask_to_continue
+  puts "Would you like to continue? [Y/n] => "
+  continue = gets.chomp
+  if continue.downcase == "y" || continue == ""
+    check_age
+  elsif continue.downcase =="n"
+  else
+    print "I'm sorry, I didn't catch that... "
+    ask_to_continue
   end
 end
 
