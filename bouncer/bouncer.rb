@@ -41,14 +41,10 @@ def get_response(arr)
 end
 
 def bounce(arr)
-  if arr.empty?
-    puts "You can't do anything!"
-  elsif arr.count > 2
-    last = arr.pop
-    puts "You can #{arr.join(", ")}, and #{last}."
-  else
-    puts "You can #{arr.join(" and ")}."
-  end
+  return puts "You can't do anything!" if arr.empty?
+  return puts "You can #{arr.join(" and ")}." if arr.count == 2
+  last = arr.pop
+  puts "You can #{arr.join(", ")}, and #{last}."
 end
 
 def ask_to_continue
