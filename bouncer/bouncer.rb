@@ -28,9 +28,13 @@
 class Bouncer
   def check_age
     arr = []
+    check_country(arr)
+    bounce(arr)
+    ask_to_continue
+  end
 
-
-    print "Are you currently in the US or UK? => "
+  def check_country(arr)
+    print "\nAre you currently in the US or UK? => "
     country = gets.chomp
 
     if country.downcase == "us"
@@ -41,14 +45,10 @@ class Bouncer
       puts "I'm sorry, I didn't catch that..."
       check_age
     end
-
-    bounce(arr)
-    ask_to_continue
   end
 
-
   def get_response_US(arr)
-    print "What is your age? => "
+    print "\nWhat is your age? => "
     age = gets.chomp.to_i
     arr.push("vote", "smoke") if age >= 18
     arr.push("drink") if age >= 21
@@ -56,7 +56,7 @@ class Bouncer
   end
 
   def get_response_UK(arr)
-    print "What is your age? => "
+    print "\nWhat is your age? => "
     age = gets.chomp.to_i
     arr.push("vote", "smoke", "drink") if age >= 18
     parents(arr) if age == 16 || age == 17
@@ -64,27 +64,27 @@ class Bouncer
   end
 
   def parents(arr)
-    print "You're too young to drink without parental supervision. Are your parents here? => "
+    print "\nYou're too young to drink without parental supervision. Are your parents here? => "
     parent_supervision = gets.chomp
     return arr.push("drink") if parent_supervision.downcase == "y"
     return if parent_supervision.downcase == "n"
     print "I'm sorry, I didn't catch that... "
-    parents
+    parents(arr)
   end
 
   def bounce(arr)
-    return puts "You can't do anything!" if arr.empty?
+    return puts "You're too young to do anything!" if arr.empty?
     return puts "You can #{arr.join(" and ")}." if arr.count == 1 || arr.count == 2
     last = arr.pop
     puts "You can #{arr.join(", ")}, and #{last}."
   end
 
   def ask_to_continue
-    puts "Would you like to continue? [Y/n] => "
+    print "\nWould you like to continue? [Y/n] => "
     continue = gets.chomp
     check_age if continue.downcase == "y" || continue == ""
     return if continue.downcase == "n"
-    print "I'm sorry, I didn't catch that... "
+    print "\nI'm sorry, I didn't catch that... "
     ask_to_continue
   end
 end
