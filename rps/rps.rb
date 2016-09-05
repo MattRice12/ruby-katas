@@ -20,11 +20,6 @@
 
 #_______________________________________________________________________
 
-ASK = "Rock, Paper, or Scissors?"
-WIN = "You WIN!"
-LOSE = "You LOSE!"
-TIE = "Tie Game!"
-
 class RPS
   attr_accessor :player_wins, :comp_wins, :tie
 
