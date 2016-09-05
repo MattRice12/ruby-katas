@@ -54,13 +54,10 @@ end
 def ask_to_continue
   puts "Would you like to continue? [Y/n] => "
   continue = gets.chomp
-  if continue.downcase == "y" || continue == ""
-    check_age
-  elsif continue.downcase =="n"
-  else
-    print "I'm sorry, I didn't catch that... "
-    ask_to_continue
-  end
+  check_age if continue.downcase == "y" || continue == ""
+  return if continue.downcase == "n"
+  print "I'm sorry, I didn't catch that... "
+  ask_to_continue
 end
 
 check_age
