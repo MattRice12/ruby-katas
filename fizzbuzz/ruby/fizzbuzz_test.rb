@@ -6,7 +6,7 @@ require_relative 'fizzbuzz'
 class FizzbuzzTest < Minitest::Test
 
   def test_fizzbuzz
-    assert_equal "fizzbuzz", Fizzbuzz.new.run
+    assert_equal "fizzbuzz", Fizzbuzz.new.run(16)
   end
   #
   # def test_buzz

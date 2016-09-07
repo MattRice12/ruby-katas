@@ -20,13 +20,9 @@
 #_________________________
 
 class Fizzbuzz
-  attr_accessor :arr
-  def initialize
-    @arr = (1..15).to_a
-  end
-
-  def run
-    @arr.each do |n|
+  def run(max)
+    max.times do |n|
+      n += 1
       case 0
       when n % 15 then puts "fizzbuzz"
       when n % 5  then puts "buzz"
@@ -38,4 +34,4 @@ class Fizzbuzz
   end
 end
 
-Fizzbuzz.new.run
+Fizzbuzz.new.run(15)
