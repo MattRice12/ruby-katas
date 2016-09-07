@@ -20,18 +20,15 @@
 #_________________________
 
 class Fizzbuzz
-  def run(max)
-    max.times do |n|
-      n += 1
-      case 0
-      when n % 15 then puts "fizzbuzz"
-      when n % 5  then puts "buzz"
-      when n % 3  then puts "fizz"
-      else
-        puts n
-      end
+  def run(n)
+    case 0
+    when n % 15 then "fizzbuzz"
+    when n % 5  then "buzz"
+    when n % 3  then "fizz"
+    else
+      n
     end
   end
 end
 
-Fizzbuzz.new.run(15)
+puts Fizzbuzz.new.run(15)
