@@ -6,15 +6,7 @@ require_relative 'fizzbuzz'
 class FizzbuzzTest < Minitest::Test
 
   def test_fizzbuzz
-    assert_equal "fizzbuzz", Fizzbuzz.new.run(30)
-
-    # assert_equal("fizzbuzz", Fizzbuzz.new.run(1..30))
-
-  #   assert_equal "fizzbuzz", Fizzbuzz.new.run(30..30)
-  #   assert_equal "fizzbuzz", Fizzbuzz.new.run(45..45)
-  #   assert_equal "fizzbuzz", Fizzbuzz.new.run(60..60)
-  #   assert_equal "fizzbuzz", Fizzbuzz.new.run(75..75)
-  #   assert_equal "fizzbuzz", Fizzbuzz.new.run(90..90)
+    assert_equal "fizzbuzz", Fizzbuzz.new.run
   end
   #
   # def test_buzz
@@ -37,5 +29,4 @@ class FizzbuzzTest < Minitest::Test
   #   assert_equal ["buzz", 34, "fizz", 32, 31, "fizzbuzz"], Fizzbuzz.new.run(30..35).flatten
   #
   # end
-
 end
