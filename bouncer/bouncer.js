@@ -29,6 +29,11 @@
 
 function checkAge(age) {
   var permissions = [];
+  givePermissions(age, permissions)
+  bounce(age, permissions)
+};
+
+function givePermissions(age, permissions) {
   if (age >= 18) {
     permissions.push("vote", "smoke")
   };
@@ -38,21 +43,16 @@ function checkAge(age) {
   if (age >= 25) {
     permissions.push("rent a car")
   };
-
-  bounce(permissions)
-
 };
 
-function bounce(permissions) {
+function bounce(age, permissions) {
   if (!permissions[0]) {
-    console.log("You can't do anything!")
+    console.log("Age: " + age + ". You can't do anything!")
   } else {
     var last_permission = permissions.pop();
-    console.log("You can " + permissions.join(", ") + ", and " + last_permission + ".")
+    console.log("Age: " + age + ". You can " + permissions.join(", ") + ", and " + last_permission + ".")
   };
 };
-
-
 
 checkAge(17)
 checkAge(18)
