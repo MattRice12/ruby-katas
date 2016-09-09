@@ -1,8 +1,13 @@
 ##How many users are there?
-
+SELECT COUNT(\*) FROM users;
 
 ##What are the 5 most expensive items?
-
+SELECT * FROM items ORDER BY price DESC LIMIT 5;
+  Small Cotton Gloves
+  Small Wooden Computer
+  Awesome Granite Pants
+  Sleek Wooden Hat
+  Ergonomic Steel Car
 
 ##What's the cheapest book? (Does that change for "category is exactly 'book'" versus "category contains 'book'"?)
 
