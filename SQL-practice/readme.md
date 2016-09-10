@@ -28,7 +28,21 @@ SELECT * FROM addresses WHERE user_id = 40;
   Yes.
     43|40|6439 Zetta Hills|Willmouth|WY|15029
     44|40|54369 Wolff Forges|Lake Bryon|CA|31587
+
+
 ##Correct Virginie Mitchell's address to "New York, NY, 10108".
+
+```
+UPDATE addresses
+SET city = 'New York', zip = '10108'
+WHERE state = 'NY' AND user_id =
+(SELECT user_id
+FROM addresses
+WHERE state = 'NY' AND user_id =
+(SELECT id
+FROM users
+WHERE first_name = 'Virginie'));
+```
 
 
 ##How much would it cost to buy one of each tool?
