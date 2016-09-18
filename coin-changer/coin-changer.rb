@@ -16,26 +16,15 @@
 class CoinChanger
   def calculate(amount)
     coins = []
-    while amount >= 25
-      coins << "25"
-      amount -= 25
+    types = [25, 10, 5, 1]
+    types.each do |t|
+      while amount >= t
+        coins << "#{t}"
+        amount -= t
+      end
     end
-
-    while amount >= 10
-      coins << "10"
-      amount -= 10
-    end
-
-    while amount >= 5
-      coins << "5"
-      amount -= 5
-    end
-
-    while amount >= 1
-      coins << "1"
-      amount -= 1
-    end
-
     coins.join(", ")
   end
 end
+
+puts CoinChanger.new.calculate(99)
