@@ -4,6 +4,13 @@
 # Hint: Use regex
 
 def pigatize(text)
+  phrase = text.split(" ").map do |word|
+    check_word(word)
+  end
+  phrase.join(" ") + "ay"
+end
+
+def check_word(text)
   if starts_with_vowel?(text)
     text
   else
@@ -11,6 +18,7 @@ def pigatize(text)
     vowel = arr.shift
     arr << vowel
     text = arr.join
+    check_word(text)
   end
 end
 
