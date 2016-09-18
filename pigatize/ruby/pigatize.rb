@@ -5,12 +5,17 @@
 
 def pigatize(text)
   if starts_with_vowel?(text)
+    return text
   else
+    arr = text.split("")
+    vowel = arr.shift
+    arr << vowel
+    text = arr.join
   end
 end
 
 def starts_with_vowel?(text)
-  true
+  text[0].downcase == /^[aeiou]/
 end
 
 loop do
@@ -18,3 +23,4 @@ loop do
   text = gets.chomp
   break if text.length == 0 # Break out of the loop if I say nothing
   puts pigatize(text)
+end
