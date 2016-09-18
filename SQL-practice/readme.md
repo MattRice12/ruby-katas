@@ -46,7 +46,9 @@ WHERE first_name = 'Virginie'));
 
 
 ##How much would it cost to buy one of each tool?
+SELECT SUM(price) FROM items WHERE title = (SELECT DISTINCT title FROM items WHERE category LIKE "%tools%");
 
+`INCOMPLETE`
 
 ##How many total items did we sell?
 

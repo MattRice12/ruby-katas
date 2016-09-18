@@ -32,3 +32,6 @@ loop do
   break if text.length == 0 # Break out of the loop if I say nothing
   puts pigatize(text)
 end
+
+
+### Doesn't account for punctuation
