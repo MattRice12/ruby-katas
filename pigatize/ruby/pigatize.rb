@@ -5,7 +5,7 @@
 
 def pigatize(text)
   if starts_with_vowel?(text)
-    return text
+    text
   else
     arr = text.split("")
     vowel = arr.shift
@@ -15,7 +15,7 @@ def pigatize(text)
 end
 
 def starts_with_vowel?(text)
-  text[0].downcase == /^[aeiou]/
+  text.downcase[/^[aeiou]/]
 end
 
 loop do
