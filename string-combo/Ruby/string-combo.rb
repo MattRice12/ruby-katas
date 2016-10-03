@@ -3,7 +3,6 @@
 # // Expected Output : d,do,dog,o,og,g
 
 class StringCombo
-
   def run(string)
     arr = string.split('')
     new_arr = []
@@ -21,6 +20,20 @@ class StringCombo
   end
 end
 
-puts StringCombo.new.run("dog")
+class Algorithm
+  def count(string)
+    result = 0
+    n = result
+    while n <= string.length
+      result += n
+      n += 1
+    end
+    result
+  end
+end
+
+puts
 puts StringCombo.new.run("gigantic")
-puts StringCombo.new.run("supercalifragilisticexpialidocious")
+puts StringCombo.new.run("gigantic").split(', ').length
+puts Algorithm.new.count("gigantic")
+puts 
