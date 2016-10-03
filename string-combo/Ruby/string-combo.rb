@@ -20,3 +20,6 @@ class StringCombo
     final_arr.join(', ')
   end
 end
+
+# puts StringCombo.new.run("gigantic")
+puts StringCombo.new.run("supercalifragilisticexpialidocious")
