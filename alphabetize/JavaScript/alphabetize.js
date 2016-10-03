@@ -5,8 +5,13 @@
 
 
 function alphabetize(string) {
-  var newArr = string.split('').sort();
-  console.log(newArr.join(''));
+  var sentenceArr = string.split(' ')
+  var finalSentence = []
+  sentenceArr.forEach(function(entry) {
+    var newArr = entry.split('').sort();
+    finalSentence.push(newArr.join(''));
+  });
+  console.log(finalSentence.join(' '))
 };
 
 alphabetize("webmaster is here")
