@@ -21,5 +21,6 @@ class StringCombo
   end
 end
 
-# puts StringCombo.new.run("gigantic")
+puts StringCombo.new.run("dog")
+puts StringCombo.new.run("gigantic")
 puts StringCombo.new.run("supercalifragilisticexpialidocious")
