@@ -7,3 +7,4 @@ class String
 end
 
 puts String.new.is_palindrome?("Tacocat")
+puts String.new.is_palindrome?("i am hungry")
