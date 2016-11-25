@@ -1,13 +1,16 @@
 class Binary
   def initialize(binary)
-    raise ArgumentError if binary.match(/[2-9]+|\D+/)
-    @binary = binary.reverse
+    raise ArgumentError, "Binary inputs only ('1' or '0')" if binary =~ /[^01]/
+    @binary = binary
   end
 
   def to_decimal
-    sum = 0
-    @binary.split("").each_with_index { |digit, i| sum += digit.to_i * (2 ** i) }
-    sum
+    @binary.chars.reverse.each_with_index.reduce(0) do |sum, (digit, i)|
+      case digit
+      when '1' then sum + (2 ** i)
+      when '0' then sum
+      end
+    end
   end
 end
 
