@@ -21,14 +21,16 @@
 
 class Fizzbuzz
   def run(n)
-    case 0
-    when n % 15 then "fizzbuzz"
-    when n % 5  then "buzz"
-    when n % 3  then "fizz"
-    else
-      n
+    n.each do |num|
+      case 0
+      when num % 15 then puts "fizzbuzz"
+      when num % 5  then puts "buzz"
+      when num % 3  then puts "fizz"
+      else
+        puts num
+      end
     end
   end
 end
 
-puts Fizzbuzz.new.run(15)
+Fizzbuzz.new.run(1..15)

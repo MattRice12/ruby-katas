@@ -1,10 +1,10 @@
 
 class String
-  def is_palindrome?(string)
+  def self.is_palindrome?(string)
     original = string.downcase.gsub(/\W/, "")
     original == original.reverse
   end
 end
 
-puts String.new.is_palindrome?("Tacocat")
-puts String.new.is_palindrome?("i am hungry")
+puts String.is_palindrome?("Tacocat")
+puts String.is_palindrome?("i am hungry")
