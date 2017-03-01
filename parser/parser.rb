@@ -12,7 +12,7 @@ class UrlParser
     url_hash[:domain] = url_hash[:domain].join(".")
     remainder = remainder.join("/")
 
-    url_hash = path_params_anchor(url_hash, remainder)
+    url_hash = path_params_anchor(url_hash, remainder) unless remainder.empty?
     url_hash
   end
 
@@ -21,22 +21,23 @@ class UrlParser
     if remainder.include?("?")
       url_hash[:path], remainder = remainder.split("?")
       url_hash[:params], url_hash[:anchor] = remainder.split("#")
+      url_hash.delete(:anchor) if url_hash[:anchor] == nil
       params = url_hash[:params].split("&")
       params.each do |param|
         k, v = param.split("=")
         param_hash.merge!({k.to_sym=>v})
       end
+      url_hash[:params] = param_hash
     elsif remainder.include?("#")
       url_hash[:path], url_hash[:anchor] = remainder.split("#")
     else
       url_hash[:path] = remainder
     end
-    url_hash[:params] = param_hash
     url_hash
   end
 end
 
-url = "https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=ruby+parser&*"
+url = "http://www.google.com"
 parsed_url = UrlParser.new.parse(url)
 puts parsed_url
 
